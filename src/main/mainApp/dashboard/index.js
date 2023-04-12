@@ -1,18 +1,18 @@
 import * as React from "react";
-import { styled, createTheme, ThemeProvider } from "@mui/material/styles";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
-import Grid from "@mui/material/Grid";
-import Paper from "@mui/material/Paper";
 import Link from "@mui/material/Link";
 import { NavAppBar } from "../../components/appBar";
 import { NavDrawer } from "../../components/drawer";
-import Chart from "../../components/charts";
-// import Deposits from './Deposits';
-// import Orders from './Orders';
+import { Routes, Route } from "react-router-dom";
+import { Albion } from "../albion";
+import { useApp } from "../../libs/context/appContext";
+import { Home } from "./dashboard";
+import { BurnettStreet } from "../burnettStreet";
 
 function Copyright(props) {
   return (
@@ -35,9 +35,16 @@ function Copyright(props) {
 const mdTheme = createTheme();
 
 function DashboardContent() {
+  const { pageTitle } = useApp();
   const [open, setOpen] = React.useState(true);
   const toggleDrawer = () => {
     setOpen(!open);
+  };
+
+  const showPage = () => {
+    if (pageTitle === "dashboard") return <Home />;
+    if (pageTitle === "albion") return <Albion />;
+    if (pageTitle === "burnettStreen") return <BurnettStreet />;
   };
 
   return (
@@ -60,40 +67,7 @@ function DashboardContent() {
         >
           <Toolbar />
           <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
-            <Grid container spacing={3}>
-              {/* Chart */}
-              <Grid item xs={12} md={8} lg={9}>
-                <Paper
-                  sx={{
-                    p: 2,
-                    display: "flex",
-                    flexDirection: "column",
-                    height: 240,
-                  }}
-                >
-                  <Chart />
-                </Paper>
-              </Grid>
-              {/* Recent Deposits */}
-              <Grid item xs={12} md={4} lg={3}>
-                <Paper
-                  sx={{
-                    p: 2,
-                    display: "flex",
-                    flexDirection: "column",
-                    height: 240,
-                  }}
-                >
-                  {/* <Deposits /> */}
-                </Paper>
-              </Grid>
-              {/* Recent Orders */}
-              <Grid item xs={12}>
-                <Paper sx={{ p: 2, display: "flex", flexDirection: "column" }}>
-                  {/* <Orders /> */}
-                </Paper>
-              </Grid>
-            </Grid>
+            {showPage()}
             <Copyright sx={{ pt: 4 }} />
           </Container>
         </Box>

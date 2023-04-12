@@ -20,11 +20,19 @@ export const AuthProvider = ({ children }) => {
     navigate("/login", { replace: true });
   };
 
-  const value = {
-    user,
-    login,
-    logout,
+  const routeToPage = (page) => {
+    navigate(page);
   };
+
+  const value = useMemo(
+    () => ({
+      user,
+      login,
+      logout,
+      routeToPage,
+    }),
+    [user]
+  );
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };

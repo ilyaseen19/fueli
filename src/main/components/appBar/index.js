@@ -8,7 +8,7 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import IconButton from "@mui/material/IconButton";
 
-const drawerWidth = 240;
+const drawerWidth = 200;
 
 const AppBar = styled(MuiAppBar, {
   shouldForwardProp: (prop) => prop !== "open",
@@ -55,7 +55,7 @@ export const NavAppBar = ({ open, toggleDrawer }) => {
           noWrap
           sx={{ flexGrow: 1 }}
         >
-          Dashboard
+          Fueli
         </Typography>
         <IconButton color="inherit">
           <Badge badgeContent={4} color="secondary">
