@@ -64,7 +64,7 @@ export const Tank = ({ title, level, levelColor }) => {
           {level}L
         </Paper>
       </Paper>
-      <Item>{title}</Item>
+      <Item sx={{ fontWeight: "bold" }}>{title}</Item>
     </Paper>
   );
 };
