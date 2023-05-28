@@ -2,16 +2,9 @@ import React from "react";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import TextField from "@mui/material/TextField";
-import { ReactGrid, Column, Row } from "@silevis/reactgrid";
-import { columns } from "../../../data/columns";
-import { headerRow } from "../../../data/headerRow";
-import "@silevis/reactgrid/styles.css";
+import HeaderRow from "../../../data/headerRow";
+import DataRow from "../../../data/dataRow";
 import "../../style.css";
-
-const getPeople = [
-  { name: "Thomas", surname: "Goldman" },
-  { name: "Susie", surname: "Quattro" },
-];
 
 const subHeader = () => {
   return (
@@ -47,19 +40,6 @@ const subHeader = () => {
 };
 
 export default function CashAnalysis() {
-  const [people] = React.useState(getPeople);
-
-  const rows = [
-    headerRow,
-    ...people.map((person, idx) => ({
-      rowId: idx,
-      cells: [
-        { type: "text", text: person.name },
-        { type: "text", text: person.surname, className: "cells" },
-      ],
-    })),
-  ];
-
   return (
     <Box
       sx={{
@@ -83,9 +63,11 @@ export default function CashAnalysis() {
           marginTop: 1,
           overflow: "hidden",
           overflowX: "scroll",
+          verticalAlign: "top",
         }}
       >
-        <ReactGrid rows={rows} columns={columns} />
+        <HeaderRow />
+        <DataRow />
       </Box>
     </Box>
   );
