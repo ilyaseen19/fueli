@@ -8,9 +8,8 @@ import Container from "@mui/material/Container";
 import Link from "@mui/material/Link";
 import { NavAppBar } from "../../components/appBar";
 import { NavDrawer } from "../../components/drawer";
-import { Routes, Route } from "react-router-dom";
 import { Albion } from "../albion";
-import { useApp } from "../../libs/context/appContext";
+import { AppContext } from "../../libs/context/appContext";
 import { Home } from "./dashboard";
 import { BurnettStreet } from "../burnettStreet";
 
@@ -35,7 +34,7 @@ function Copyright(props) {
 const mdTheme = createTheme();
 
 function DashboardContent() {
-  const { pageTitle } = useApp();
+  const { pageTitle } = React.useContext(AppContext);
   const [open, setOpen] = React.useState(true);
   const toggleDrawer = () => {
     setOpen(!open);

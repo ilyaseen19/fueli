@@ -27,7 +27,7 @@ export const Tank = ({ title, level, levelColor }) => {
     }
 
     if (title === "Ado") {
-      let calc = JSON.stringify((level / fullTankLevel90) * 100) + "%";
+      let calc = JSON.stringify((level / fullTankLevelAdo) * 100) + "%";
       return calc;
     }
   };

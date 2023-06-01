@@ -18,7 +18,7 @@ import LayersIcon from "@mui/icons-material/Layers";
 import AssignmentIcon from "@mui/icons-material/Assignment";
 import ExpandLess from "@mui/icons-material/ExpandLess";
 import ExpandMore from "@mui/icons-material/ExpandMore";
-import { useApp } from "../../libs/context/appContext";
+import { AppContext, useApp } from "../../libs/context/appContext";
 import Collapse from "@mui/material/Collapse";
 // import { mainListItems, secondaryListItems } from "../listItems";
 
@@ -51,7 +51,7 @@ const Drawer = styled(MuiDrawer, {
 }));
 
 export const NavDrawer = ({ open, toggleDrawer }) => {
-  const { switchPage } = useApp();
+  const { switchPage } = React.useContext(AppContext);
   const [expand, setExpand] = React.useState(true);
 
   const handleClick = () => {

@@ -13,7 +13,6 @@ export const CreateReportIconButton = () => {
       <IconButton
         sx={{ margin: 1 }}
         size="medium"
-        tool
         aria-label="Create Report"
       >
         <NoteAddIcon fontSize="medium" />
