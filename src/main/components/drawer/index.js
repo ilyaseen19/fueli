@@ -18,9 +18,9 @@ import LayersIcon from "@mui/icons-material/Layers";
 import AssignmentIcon from "@mui/icons-material/Assignment";
 import ExpandLess from "@mui/icons-material/ExpandLess";
 import ExpandMore from "@mui/icons-material/ExpandMore";
-import { AppContext, useApp } from "../../libs/context/appContext";
+import { useNavigate } from "react-router-dom";
 import Collapse from "@mui/material/Collapse";
-// import { mainListItems, secondaryListItems } from "../listItems";
+import { useAuth } from "../../libs/context/authContext";
 
 const drawerWidth = 200;
 
@@ -51,7 +51,8 @@ const Drawer = styled(MuiDrawer, {
 }));
 
 export const NavDrawer = ({ open, toggleDrawer }) => {
-  const { switchPage } = React.useContext(AppContext);
+  const { logout } = useAuth()
+  const navigate = useNavigate();
   const [expand, setExpand] = React.useState(true);
 
   const handleClick = () => {
@@ -60,19 +61,19 @@ export const NavDrawer = ({ open, toggleDrawer }) => {
 
   const mainListItems = (
     <React.Fragment>
-      <ListItemButton onClick={() => switchPage("dashboard")}>
+      <ListItemButton onClick={() => navigate("/home")}>
         <ListItemIcon>
           <DashboardIcon />
         </ListItemIcon>
         <ListItemText primary="Dashboard" />
       </ListItemButton>
-      <ListItemButton onClick={() => switchPage("albion")}>
+      <ListItemButton onClick={() => navigate("/albion")}>
         <ListItemIcon>
           <LayersIcon />
         </ListItemIcon>
         <ListItemText primary="Albion" />
       </ListItemButton>
-      <ListItemButton onClick={() => switchPage("burnettStreen")}>
+      <ListItemButton onClick={() => navigate("/barnet-street")}>
         <ListItemIcon>
           <BarChartIcon />
         </ListItemIcon>
@@ -107,7 +108,7 @@ export const NavDrawer = ({ open, toggleDrawer }) => {
         </List>
       </Collapse>
       <Divider />
-      <ListItemButton>
+      <ListItemButton onClick={logout}>
         <ListItemIcon>
           <LogoutIcon />
         </ListItemIcon>

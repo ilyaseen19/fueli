@@ -4,6 +4,7 @@ import Paper from "@mui/material/Paper";
 import { CreateReportIconButton } from "../buttons";
 import { YearMonth } from "../dates";
 import BasicSelect from "../selects";
+import Box from "@mui/material/Box";
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
@@ -15,19 +16,19 @@ const Item = styled(Paper)(({ theme }) => ({
 
 export const ToolBar = () => {
   return (
-    <div
+    <Box
       style={{
         display: "flex",
         justifyContent: "flex-end",
         alignItems: "center",
         paddingRight: 3,
-        backgroundColor: "white",
+        // backgroundColor: "white",
         borderRadius: 3
       }}
     >
       <BasicSelect />
       <YearMonth />
       <CreateReportIconButton />
-    </div>
+    </Box>
   );
 };

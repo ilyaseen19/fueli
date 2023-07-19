@@ -3,10 +3,13 @@ import MuiAppBar from "@mui/material/AppBar";
 import Badge from "@mui/material/Badge";
 import MenuIcon from "@mui/icons-material/Menu";
 import NotificationsIcon from "@mui/icons-material/Notifications";
+import ModeNightOutlinedIcon from "@mui/icons-material/ModeNightOutlined";
+import LightModeOutlinedIcon from "@mui/icons-material/LightModeOutlined";
 import { styled } from "@mui/material/styles";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import IconButton from "@mui/material/IconButton";
+import { AppContext } from "../../libs/context/appContext";
 
 const drawerWidth = 200;
 
@@ -29,6 +32,7 @@ const AppBar = styled(MuiAppBar, {
 }));
 
 export const NavAppBar = ({ open, toggleDrawer }) => {
+  const { theme, toggleTheme } = React.useContext(AppContext);
   return (
     <AppBar position="absolute" open={open}>
       <Toolbar
@@ -57,6 +61,15 @@ export const NavAppBar = ({ open, toggleDrawer }) => {
         >
           Fueli
         </Typography>
+        <IconButton color="inherit" onClick={toggleTheme}>
+          <Badge color="secondary">
+            {theme === "dark" ? (
+              <LightModeOutlinedIcon />
+            ) : (
+              <ModeNightOutlinedIcon />
+            )}
+          </Badge>
+        </IconButton>
         <IconButton color="inherit">
           <Badge badgeContent={4} color="secondary">
             <NotificationsIcon />

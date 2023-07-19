@@ -1,5 +1,6 @@
 import React from "react";
 import { styled } from "@mui/material/styles";
+import Container from "@mui/material/Container";
 import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
@@ -20,31 +21,30 @@ const Item = styled(Paper)(({ theme }) => ({
 
 export const Albion = () => {
   const { user } = React.useContext(AppContext);
+  console.log(user);
 
   return (
-    <Box sx={{ flexGrow: 1 }}>
-      <Grid container spacing={2}>
-        <Grid item xs={12}>
-          <ToolBar />
-        </Grid>
-        <Grid item xs={12}>
-          <Item>
-            <ShiftSaleRecord />
-          </Item>
-        </Grid>
-        <Grid item xs={12}>
-          <Item sx={{ display: "flex", flexDirection: "column" }}>
-            <Typography
-              component={"div"}
-              sx={{ display: "flex", fontWeight: "bold" }}
-            >
-              Daily report for April 2023
-            </Typography>
-            <Divider />
-            <DailyReport />
-          </Item>
-        </Grid>
+    <Grid container spacing={2}>
+      <Grid item xs={12}>
+        <ToolBar />
       </Grid>
-    </Box>
+      <Grid item xs={12}>
+        <Item sx={{ display: "flex", flexDirection: "column" }}>
+          <Typography
+            component={"div"}
+            sx={{ display: "flex", fontWeight: "bold" }}
+          >
+            Daily report for April 2023
+          </Typography>
+          <Divider />
+          <DailyReport />
+        </Item>
+      </Grid>
+      <Grid item xs={12}>
+        <Item>
+          <ShiftSaleRecord />
+        </Item>
+      </Grid>
+    </Grid>
   );
 };
