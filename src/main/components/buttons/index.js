@@ -4,22 +4,42 @@ import Stack from "@mui/material/Stack";
 import DeleteIcon from "@mui/icons-material/Delete";
 import AlarmIcon from "@mui/icons-material/Alarm";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
-import NoteAddIcon from "@mui/icons-material/NoteAdd";
+import WaterDropOutlinedIcon from "@mui/icons-material/WaterDropOutlined";
+import SendOutlinedIcon from "@mui/icons-material/SendOutlined";
+import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 
-export const CreateReportIconButton = () => {
+const MyIconButton = ({ trigger, title, icon }) => {
   return (
-    <Tooltip title="Create Report">
+    <Tooltip title={title}>
       <IconButton
         sx={{ margin: 1 }}
         size="medium"
-        aria-label="Create Report"
+        aria-label={title}
+        onClick={trigger}
       >
-        <NoteAddIcon fontSize="medium" />
+        {icon}
       </IconButton>
     </Tooltip>
   );
 };
+
+const MyButtonWithIcon = ({ trigger, title, icon, variant, color }) => {
+  return (
+    <Button
+      sx={{ m: 1 }}
+      endIcon={icon}
+      variant={variant}
+      size="small"
+      color={color}
+      onClick={trigger}
+    >
+      {title}
+    </Button>
+  );
+};
+
+export { MyIconButton, MyButtonWithIcon };
 {
   /* <IconButton aria-label="delete" disabled color="primary">
         <DeleteIcon />

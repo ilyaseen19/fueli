@@ -76,7 +76,7 @@ function a11yProps(index) {
   };
 }
 
-export default function DailyReport() {
+export default function CashAnalysisReport() {
   const theme = useTheme();
   const [value, setValue] = React.useState(0);
 

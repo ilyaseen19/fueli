@@ -8,6 +8,7 @@ import "../../style.css";
 import TotalsRow from "../../../data/totalsRow";
 import ShopRow from "../../../data/shopRow";
 import OverAll from "../../../data/overAll";
+import { AppContext } from "../../../libs/context/appContext";
 
 const subHeader = () => {
   return (
@@ -43,6 +44,7 @@ const subHeader = () => {
 };
 
 export default function CashAnalysis() {
+  const { data } = React.useContext(AppContext);
   return (
     <Box
       sx={{
@@ -53,7 +55,6 @@ export default function CashAnalysis() {
         flexDirection: "column",
       }}
     >
-      <Typography sx={{ fontWeight: "bold" }}>Cash Analysis</Typography>
       {subHeader()}
       <Box
         sx={{
@@ -68,7 +69,78 @@ export default function CashAnalysis() {
         }}
       >
         <HeaderRow />
-        <DataRow />
+        {data[0].dailyShifts[0].PM.attendants.map((attendant, index) => {
+          return (
+            <DataRow
+              key={index}
+              openingN1={attendant.pump === "oneAndTwo" ? data[0].dailyShifts[0].PM.pumps.oneAndTwo.openingN1 : data[0].dailyShifts[0].PM.pumps.threeAndFour.openingN3}
+              openingN2={attendant.pump === "oneAndTwo" ? data[0].dailyShifts[0].PM.pumps.oneAndTwo.openingN2 : data[0].dailyShifts[0].PM.pumps.threeAndFour.openingN4}
+              openingE1={attendant.pump === "oneAndTwo" ? data[0].dailyShifts[0].PM.pumps.oneAndTwo.openingE1 : data[0].dailyShifts[0].PM.pumps.threeAndFour.openingE3}
+              openingE2={attendant.pump === "oneAndTwo" ? data[0].dailyShifts[0].PM.pumps.oneAndTwo.openingE2 : data[0].dailyShifts[0].PM.pumps.threeAndFour.openingE4}
+              openingD1={attendant.pump === "oneAndTwo" ? 0 : data[0].dailyShifts[0].PM.pumps.fiveAndSix.openingD5}
+              openingD2={attendant.pump === "oneAndTwo" ? 0 : data[0].dailyShifts[0].PM.pumps.fiveAndSix.openingD6}
+              // closing readings
+              closingN1={attendant.pump === "oneAndTwo" ? data[0].dailyShifts[0].PM.pumps.oneAndTwo.closingN1 : data[0].dailyShifts[0].PM.pumps.threeAndFour.closingN3}
+              closingN2={attendant.pump === "oneAndTwo" ? data[0].dailyShifts[0].PM.pumps.oneAndTwo.closingN2 : data[0].dailyShifts[0].PM.pumps.threeAndFour.closingN4}
+              closingE1={attendant.pump === "oneAndTwo" ? data[0].dailyShifts[0].PM.pumps.oneAndTwo.closingE1 : data[0].dailyShifts[0].PM.pumps.threeAndFour.closingE3}
+              closingE2={attendant.pump === "oneAndTwo" ? data[0].dailyShifts[0].PM.pumps.oneAndTwo.closingE2 : data[0].dailyShifts[0].PM.pumps.threeAndFour.closingE4}
+              closingD1={attendant.pump === "oneAndTwo" ? 0 : data[0].dailyShifts[0].PM.pumps.fiveAndSix.closingD5}
+              closingD2={attendant.pump === "oneAndTwo" ? 0 : data[0].dailyShifts[0].PM.pumps.fiveAndSix.closingD6}
+              //return to tanks
+              returnN1={attendant.pump === "oneAndTwo" ? data[0].dailyShifts[0].PM.pumps.oneAndTwo.returnN1 : data[0].dailyShifts[0].PM.pumps.threeAndFour.returnN3}
+              returnN2={attendant.pump === "oneAndTwo" ? data[0].dailyShifts[0].PM.pumps.oneAndTwo.returnN2 : data[0].dailyShifts[0].PM.pumps.threeAndFour.returnN4}
+              returnE1={attendant.pump === "oneAndTwo" ? data[0].dailyShifts[0].PM.pumps.oneAndTwo.returnE1 : data[0].dailyShifts[0].PM.pumps.threeAndFour.returnE3}
+              returnE2={attendant.pump === "oneAndTwo" ? data[0].dailyShifts[0].PM.pumps.oneAndTwo.returnE2 : data[0].dailyShifts[0].PM.pumps.threeAndFour.returnE4}
+              returnD1={attendant.pump === "oneAndTwo" ? 0 : data[0].dailyShifts[0].PM.pumps.fiveAndSix.returnD5}
+              returnD2={attendant.pump === "oneAndTwo" ? 0 : data[0].dailyShifts[0].PM.pumps.threeAndFour.returnD6}
+              shift="PM"
+              attendant={attendant.name}
+              product1={data[0].products[1].product}
+              product2={data[0].products[0].product}
+              product3={data[0].products[2].product}
+              priceN={data[0].products[1].sellingPrice}
+              priceE={data[0].products[0].sellingPrice}
+              priceD={data[0].products[2].sellingPrice}
+              drops={attendant.drops}
+            />
+          );
+        })}
+        {data[0].dailyShifts[0].AM.attendants.map((attendant, index) => {
+          return (
+            <DataRow
+              key={index}
+              openingN1={attendant.pump === "oneAndTwo" ? data[0].dailyShifts[0].AM.pumps.oneAndTwo.openingN1 : data[0].dailyShifts[0].AM.pumps.threeAndFour.openingN3}
+              openingN2={attendant.pump === "oneAndTwo" ? data[0].dailyShifts[0].AM.pumps.oneAndTwo.openingN2 : data[0].dailyShifts[0].AM.pumps.threeAndFour.openingN4}
+              openingE1={attendant.pump === "oneAndTwo" ? data[0].dailyShifts[0].AM.pumps.oneAndTwo.openingE1 : data[0].dailyShifts[0].AM.pumps.threeAndFour.openingE3}
+              openingE2={attendant.pump === "oneAndTwo" ? data[0].dailyShifts[0].AM.pumps.oneAndTwo.openingE2 : data[0].dailyShifts[0].AM.pumps.threeAndFour.openingE4}
+              openingD1={attendant.pump === "oneAndTwo" ? 0 : data[0].dailyShifts[0].AM.pumps.fiveAndSix.openingD5}
+              openingD2={attendant.pump === "oneAndTwo" ? 0 : data[0].dailyShifts[0].AM.pumps.fiveAndSix.openingD6}
+              // closing readings
+              closingN1={attendant.pump === "oneAndTwo" ? data[0].dailyShifts[0].AM.pumps.oneAndTwo.closingN1 : data[0].dailyShifts[0].AM.pumps.threeAndFour.closingN3}
+              closingN2={attendant.pump === "oneAndTwo" ? data[0].dailyShifts[0].AM.pumps.oneAndTwo.closingN2 : data[0].dailyShifts[0].AM.pumps.threeAndFour.closingN4}
+              closingE1={attendant.pump === "oneAndTwo" ? data[0].dailyShifts[0].AM.pumps.oneAndTwo.closingE1 : data[0].dailyShifts[0].AM.pumps.threeAndFour.closingE3}
+              closingE2={attendant.pump === "oneAndTwo" ? data[0].dailyShifts[0].AM.pumps.oneAndTwo.closingE2 : data[0].dailyShifts[0].AM.pumps.threeAndFour.closingE4}
+              closingD1={attendant.pump === "oneAndTwo" ? 0 : data[0].dailyShifts[0].AM.pumps.fiveAndSix.closingD5}
+              closingD2={attendant.pump === "oneAndTwo" ? 0 : data[0].dailyShifts[0].AM.pumps.fiveAndSix.closingD6}
+              //return to tanks
+              returnN1={attendant.pump === "oneAndTwo" ? data[0].dailyShifts[0].AM.pumps.oneAndTwo.returnN1 : data[0].dailyShifts[0].AM.pumps.threeAndFour.returnN3}
+              returnN2={attendant.pump === "oneAndTwo" ? data[0].dailyShifts[0].AM.pumps.oneAndTwo.returnN2 : data[0].dailyShifts[0].AM.pumps.threeAndFour.returnN4}
+              returnE1={attendant.pump === "oneAndTwo" ? data[0].dailyShifts[0].AM.pumps.oneAndTwo.returnE1 : data[0].dailyShifts[0].AM.pumps.threeAndFour.returnE3}
+              returnE2={attendant.pump === "oneAndTwo" ? data[0].dailyShifts[0].AM.pumps.oneAndTwo.returnE2 : data[0].dailyShifts[0].AM.pumps.threeAndFour.returnE4}
+              returnD1={attendant.pump === "oneAndTwo" ? 0 : data[0].dailyShifts[0].AM.pumps.fiveAndSix.returnD5}
+              returnD2={attendant.pump === "oneAndTwo" ? 0 : data[0].dailyShifts[0].AM.pumps.threeAndFour.returnD6}
+              shift="AM"
+              attendant={attendant.name}
+              product1={data[0].products[1].product}
+              product2={data[0].products[0].product}
+              product3={data[0].products[2].product}
+              priceN={data[0].products[1].sellingPrice}
+              priceE={data[0].products[0].sellingPrice}
+              priceD={data[0].products[2].sellingPrice}
+              drops={attendant.drops}
+            />
+          );
+        })}
         <TotalsRow />
         <ShopRow />
         <OverAll />

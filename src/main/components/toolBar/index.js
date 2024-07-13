@@ -1,7 +1,9 @@
 import React from "react";
 import { styled } from "@mui/material/styles";
 import Paper from "@mui/material/Paper";
-import { CreateReportIconButton } from "../buttons";
+import { MyButtonWithIcon, MyIconButton } from "../buttons";
+import WaterDropOutlinedIcon from "@mui/icons-material/WaterDropOutlined";
+import NoteAddIcon from "@mui/icons-material/NoteAdd";
 import { YearMonth } from "../dates";
 import BasicSelect from "../selects";
 import Box from "@mui/material/Box";
@@ -14,7 +16,7 @@ const Item = styled(Paper)(({ theme }) => ({
   color: theme.palette.text.secondary,
 }));
 
-export const ToolBar = () => {
+export const ToolBar = ({ openModal, openSheetModal }) => {
   return (
     <Box
       style={{
@@ -22,13 +24,23 @@ export const ToolBar = () => {
         justifyContent: "flex-end",
         alignItems: "center",
         paddingRight: 3,
-        // backgroundColor: "white",
-        borderRadius: 3
+        borderRadius: 3,
       }}
     >
-      <BasicSelect />
-      <YearMonth />
-      <CreateReportIconButton />
+      {/* <YearMonth /> */}
+      <MyButtonWithIcon
+        color="success"
+        trigger={openSheetModal}
+        title="Create Sheet"
+        variant="outlined"
+        icon={<NoteAddIcon fontSize="medium" />}
+      />
+      <MyButtonWithIcon
+        trigger={openModal}
+        title="Create Drop"
+        variant="outlined"
+        icon={<WaterDropOutlinedIcon fontSize="medium" />}
+      />
     </Box>
   );
 };

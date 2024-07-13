@@ -8,8 +8,10 @@ import { AppContext, useApp } from "../../libs/context/appContext";
 import Divider from "@mui/material/Divider";
 import Typography from "@mui/material/Typography";
 import { ToolBar } from "../../components/toolBar";
-import { DailyReport } from "../../components/tabs";
 import ShiftSaleRecord from "../../components/tabs/shiftSale";
+import MyModal from "../../components/modal";
+import SheetModal from "../../components/modal/sheetModal";
+import CashAnalysisReport from "../../components/tabs/cashAnalysis";
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
@@ -21,12 +23,16 @@ const Item = styled(Paper)(({ theme }) => ({
 
 export const Albion = () => {
   const { user } = React.useContext(AppContext);
-  console.log(user);
+  const [open, setOpen] = React.useState(false);
+  const [openSheet, setOpenSheet] = React.useState(false);
 
   return (
     <Grid container spacing={2}>
       <Grid item xs={12}>
-        <ToolBar />
+        <ToolBar
+          openModal={() => setOpen(true)}
+          openSheetModal={() => setOpenSheet(true)}
+        />
       </Grid>
       <Grid item xs={12}>
         <Item sx={{ display: "flex", flexDirection: "column" }}>
@@ -34,16 +40,21 @@ export const Albion = () => {
             component={"div"}
             sx={{ display: "flex", fontWeight: "bold" }}
           >
-            Daily report for April 2023
+            Cash Analysis for April 2024
           </Typography>
           <Divider />
-          <DailyReport />
+          <CashAnalysisReport />
         </Item>
       </Grid>
       <Grid item xs={12}>
-        <Item>
+        {/* <Item>
           <ShiftSaleRecord />
-        </Item>
+        </Item> */}
+        <SheetModal
+          open={openSheet}
+          toggleSheet={() => setOpenSheet(!openSheet)}
+        />
+        <MyModal open={open} toggleState={() => setOpen(!open)} />
       </Grid>
     </Grid>
   );
